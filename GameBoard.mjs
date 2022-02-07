@@ -9,7 +9,7 @@ class GameBoard {
     createGrid(level) {
         this.grid = []
         this.DOMGrid.innerHTML = ''
-        this.DOMGrid.style.cssText = `grid-template-columns: repeat(${16}, ${20}px)`
+        this.DOMGrid.style.cssText = `grid-template-columns: repeat(${CELL_SIZE}, ${CELL_SIZE}px)`
 
         let floor = FLOORS
         level.forEach((square, i) => {
