@@ -17,13 +17,10 @@ class Donkey {
     angryAnimate() {
         if (plumber.onFloor > startFloor) {
             this.angry = true
-            this.me.style.width = '47px'
-            this.me.style.height = '32px'
-            this.me.classList.add('donkeyAngry')
-
             let x = 0
             let i = 0;
             let intervalID = setInterval(() => {
+                this.me.classList.add('donkeyAngry')
                 this.me.style.transform = 'scaleY(-1)'
                 this.me.classList.remove(...this.movesAngry)
                 this.me.classList.add(this.movesAngry[i % this.movesAngry.length])
