@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: url('img/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#game {
+    position: relative;
+    display: inline-grid;
+    background: black;
+}
+
+.game-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border: 5px darkblue solid;
+    background: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+}
+
+#score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    border: 5px darkblue solid;
+    background: black;
+    margin-top: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+#start-button {
+    margin-top: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.square {
+    display: block;
+}
+
+.blank {
+    background: black;
+}
+
+.platform {
+    background: url("img/45990.png") 0 0;
+}
+
+.ladder {
+    /*background: yellow;*/
+    background: url("img/ladder.png") 0 0;
+}
+
+.barrel {
+
+}
+
+#mario {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: url("img/sprite.png");
+}
+
+.right {
+    background-position: -158px -3px;
+}
+
+.right.move1 {
+    background-position: -176px -4px;
+}
+
+.right.move2 {
+    background-position: -197px -3px;
+}
+
+.left {
+    background-position: -135px -3px;
+}
+
+.left.move1 {
+    background-position: -115px -4px;
+}
+.left.move2 {
+    background-position: -94px -3px;
+}
+
+.vertical {
+    background-position: -94px -3px;
+}
+.vertical.move1 {
+    background-position: -166px -23px;
+}
+.vertical.move2 {
+    background-position: -125px -23px;
+}
+.fall.left {
+    background-position: -73px -107px;
+}
+.fall.top {
+    background-position: -93px -107px;
+}
+
+.fall.right {
+    background-position: -113px -107px;
+}
+
+.fall.bottom {
+    background-position: -132px -107px;
+}
