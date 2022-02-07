@@ -77,7 +77,48 @@ body {
 }
 
 .barrel {
+    width: 10px;
+    height: 16px;
+    background-image: url("./img/sprite.png");
+    background-position: -113px -264px;
+    display: block;
+    position: absolute;
+}
 
+.barrel.vertical1 {
+    width: 15px;
+    height: 10px;
+    background-position: -96px -259px;
+}
+
+.barrel.vertical2 {
+    width: 15px;
+    height: 10px;
+    background-position: -96px -270px;
+}
+
+.b {
+    width: 12px;
+    height: 10px;
+    background-image: url("./img/sprite.png");
+    position: absolute;
+    display: block;
+}
+
+.b.horizontal1 {
+     background-position: -66px -258px;
+ }
+
+.b.horizontal2 {
+    background-position: -81px -258px;
+}
+
+.b.horizontal3 {
+    background-position: -81px -270px;
+}
+
+.b.horizontal4 {
+    background-position: -66px -270px;
 }
 
 #mario {
