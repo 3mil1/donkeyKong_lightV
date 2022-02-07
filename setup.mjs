@@ -9,7 +9,8 @@ export const OBJECT_TYPE = {
     BARREL: 'barrel',
     APE: 'ape',
     PRINCESS: 'princess',
-    MARIO: 'marioStart'
+    MARIO: 'marioStart',
+    HOLE: 'hole'
 }
 
 export const CLASS_LIST = [
@@ -20,6 +21,7 @@ export const CLASS_LIST = [
     OBJECT_TYPE.APE, //4
     OBJECT_TYPE.PRINCESS, //5
     OBJECT_TYPE.MARIO, //6
+    OBJECT_TYPE.HOLE, //7
 ]
 
 export const LEVEL = [
@@ -31,7 +33,7 @@ export const LEVEL = [
     0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1, 0, 0,
     0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,

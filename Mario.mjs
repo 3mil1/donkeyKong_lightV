@@ -115,8 +115,18 @@ function jump() {
 
 function isCollide() {
     let platform = document.querySelectorAll(`.platform.floor${plumber.onFloor}`)
+    let falling = document.querySelector(`.hole`)
+    let fallingRect = falling.getBoundingClientRect()
     let ladder = document.querySelectorAll(`.ladder.floor${plumber.onFloor}`)
     let marioRect = mario.getBoundingClientRect()
+
+    // falls into a hole
+    if (marioRect.bottom === fallingRect.top
+        && marioRect.left >= fallingRect.left
+        && marioRect.right <= fallingRect.right
+    ) {
+        mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
+    }
 
     // falling down from platform
     if (!(marioRect.right - 10 >= platform.item(0).getBoundingClientRect().left && (marioRect.left + 10) <= platform.item(platform.length - 1).getBoundingClientRect().right)) {
@@ -129,6 +139,8 @@ function isCollide() {
                 && platform.item(0).getBoundingClientRect().top !== marioRect.bottom) {
                 mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
             }
+
+            // if there are no any ladder
         } else if (marioRect.bottom !== platform.item(0).getBoundingClientRect().top) {
             mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
         }
