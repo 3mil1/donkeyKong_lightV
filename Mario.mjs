@@ -129,6 +129,8 @@ function isCollide() {
                 && platform.item(0).getBoundingClientRect().top !== marioRect.bottom) {
                 mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
             }
+        } else if (marioRect.bottom !== platform.item(0).getBoundingClientRect().top) {
+            mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
         }
     }
 
@@ -176,6 +178,15 @@ function canClimbUp() {
             }
         }
     }
+
+    let ladderBottom
+    let ladderTop
+
+    for (const ladderEl of ladder) {
+        ladderEl.getBoundingClientRect().bottom
+
+    }
+
     return false
 }
 
