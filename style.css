@@ -77,7 +77,9 @@ body {
 }
 
 .barrel {
-
+    background: url("img/sprite.png") -111px -264px;
+    width: 10px;
+    height: 16px;
 }
 
 #mario {
@@ -85,6 +87,13 @@ body {
     width: 16px;
     height: 16px;
     background-image: url("img/sprite.png");
+}
+
+#donkey {
+    position: absolute;
+    width: 40px;
+    height: 32px;
+    background: url("img/sprite.png") -108px -152px;
 }
 
 .right {
@@ -137,4 +146,24 @@ body {
 
 .fall.bottom {
     background-position: -132px -107px;
+}
+
+.donkeyAngry.one {
+    background-position: -154px -187px !important;
+}
+
+.donkeyAngry.two {
+    background-position: -201px -187px !important;
+}
+
+.donkeyAngry.three {
+    background-position: -254px -187px !important;
+}
+
+.donkeyPrepare.one {
+    background-position: -202px -152px !important;
+}
+
+.donkeyPrepare.two {
+    background-position: -57px -152px !important;
 }

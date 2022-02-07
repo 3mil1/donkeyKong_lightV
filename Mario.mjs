@@ -26,13 +26,11 @@ export const animate = () => {
         if (e.code === 'KeyW') plumber.up = true;
         if (e.code === 'KeyS') plumber.down = true;
 
-
         if (!e.repeat) {
             if (e.code === 'Space') plumber.jump = true
         } else {
             plumber.jump = false
         }
-
 
     })
 
@@ -101,7 +99,7 @@ function move() {
 
     changeFloor()
     isCollide()
-    game.animation = window.requestAnimationFrame(move);
+    // game.animation = window.requestAnimationFrame(move);
 }
 
 function jump() {
