@@ -31,7 +31,7 @@ function startGame() {
     setInterval(()=>{
     let b = new Barrel();
     b.moving();
-},1000);
+},3000);
 
 
     window.requestAnimationFrame(playGame)

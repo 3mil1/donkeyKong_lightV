@@ -99,6 +99,11 @@ function move() {
 
     changeFloor()
     isCollide()
+    if (bump()) {
+        //game over
+        //clear all intervals
+        console.log('game over');
+    }
     // game.animation = window.requestAnimationFrame(move);
 }
 
@@ -223,4 +228,13 @@ function changeFloor() {
 
 }
 
-
+function bump() {
+    let mRect = mario.getBoundingClientRect();
+    let barrels = document.querySelectorAll('.barrel');
+    for (const barrel of barrels) {
+        const b = barrel.getBoundingClientRect();
+         return !(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left);
+        // return mRect.top > b.bottom || mRect.bottom < b.top
+    }
+    return false;
+}

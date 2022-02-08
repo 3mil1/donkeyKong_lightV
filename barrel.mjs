@@ -8,12 +8,15 @@ class Barrel {
         this.barrel.style.left = donkey.offsetLeft + 13 + 'px';
         this.game.appendChild(this.barrel);
         this.moves = ['move1', 'move2'];
+        this.moves2 = ['move1', 'move2', 'move3', 'move4'];
     }
 
     moving() {
         let i = 0;
         let iId = setInterval(() => {
+            //if barrel falling
             let hCurrent = this.barrel.offsetTop;
+            // let wCurrent = this.barrel.offsetLeft;
             hCurrent += 5;
             this.barrel.style.top = hCurrent + 'px';
             this.barrel.classList.remove(...this.moves);
@@ -23,6 +26,7 @@ class Barrel {
                 clearInterval(iId);
                 this.barrel.remove();
             }
+
         }, 100);
     }
 }
