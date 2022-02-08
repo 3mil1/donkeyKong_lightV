@@ -1,7 +1,7 @@
 import {gameOver} from "./index.mjs";
 
 export let plumber = {
-    right: true,
+    right: false,
     left: false,
     moving: false,
     up: false,

@@ -4,6 +4,7 @@ import {plumber} from "./Mario.mjs";
 import GameBoard from "./GameBoard.mjs";
 import {animate} from "./Mario.mjs";
 import Donkey from "./donkey.mjs";
+import Barrel from "./barrel.mjs";
 
 
 // game const
@@ -19,11 +20,18 @@ function startGame() {
 
     let mario = document.createElement("div")
     mario.id = "mario"
+    mario.classList.add('right');
     let startMario = document.querySelector('.marioStart')
     startMario.appendChild(mario)
 
     Donkey.create()
     donkey = new Donkey()
+    let b = new Barrel();
+    b.moving();
+    setInterval(()=>{
+    let b = new Barrel();
+    b.moving();
+},1000);
 
 
     window.requestAnimationFrame(playGame)
