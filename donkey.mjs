@@ -1,17 +1,17 @@
 import {plumber} from "./Mario.mjs";
+import Barrel from "./barrel.mjs";
 
 let startFloor = 0
 
 class Donkey {
     constructor() {
         this.angry = false
-        this.prepearForThorw = false
-        this.takesBarell = false
-        this.haveBarell = false
-        this.throwBarell = false
+        this.takeBarrel = false
+        this.throwBarrel = false
         this.me = document.getElementById('donkey')
         this.movesAngry = ['one', 'two', 'three']
         this.movesPrepare = ['one', 'two',]
+        this.movesNewBarrel = ['take', 'have',]
     }
 
     angryAnimate() {
@@ -30,44 +30,60 @@ class Donkey {
                     this.me.classList.remove('donkeyAngry')
                     this.me.style.transform = 'scaleY(1)'
                     window.clearInterval(intervalID)
-
+                    this.angry = false
                 }
             }, 150);
-
             startFloor = plumber.onFloor
-
         }
     }
 
     prepare() {
-        if (this.prepearToThrow) {
-            this.me.style.width = '47px'
-            this.me.style.height = '32px'
+        this.takeBarrel = true
+        let x = 0
+        let i = 0;
+        let intervalID = setInterval(() => {
             this.me.classList.add('donkeyPrepare')
+            this.me.classList.remove(...this.movesPrepare)
+            this.me.classList.add(this.movesPrepare[i % this.movesPrepare.length])
+            i++
+            if (++x === 10) {
+                this.me.classList.remove('donkeyPrepare')
+                this.me.classList.remove(...this.movesPrepare)
+                window.clearInterval(intervalID)
+                this.takeNewBarrel()
+            }
+        }, 300);
+    }
 
-            let x
+    takeNewBarrel() {
+        if (this.takeBarrel) {
+            console.log('new barrel')
+            let x = 0
             let i = 0;
             let intervalID = setInterval(() => {
-                this.me.classList.remove(...this.movesPrepare)
-                this.me.classList.add(this.movesPrepare[i % this.movesPrepare.length])
+                this.me.classList.add('donkeyNewBarrel')
+                this.me.classList.remove(...this.movesNewBarrel)
+                this.me.style.width = '43px'
+                this.me.classList.add(this.movesNewBarrel[i % this.movesNewBarrel.length])
                 i++
-
-                if (++x === 10) {
-                    this.me.classList.remove('donkeyPrepare')
+                if (++x === 3) {
+                    this.me.style.width = '47px'
+                    this.me.classList.remove('donkeyNewBarrel')
+                    this.me.classList.remove(...this.movesNewBarrel)
+                    this.takeBarrel = false
                     window.clearInterval(intervalID)
 
+                    this.throwBarrel = true
+                    let b = new Barrel();
+                    b.moving();
                 }
-            }, 300);
-
-            this.prepearToThrow = false
+            }, 600);
         }
     }
 
-    attack() {
+    attackD() {
         this.prepare()
-        this.prepearToThrow = true
     }
-
 
     static create() {
         let donkey = document.createElement("div")

@@ -72,9 +72,10 @@ body {
 }
 
 .ladder {
-    /*background: yellow;*/
     background: url("img/ladder.png") 0 0;
 }
+
+/*------------------------------BARREL------------------------------*/
 
 .barrel {
     background-image: url("./img/sprite.png");
@@ -86,6 +87,7 @@ body {
     width: 10px;
     height: 16px;
     background-position: -113px -264px;
+    position: relative;
 }
 
 .barrel.vertical {
@@ -97,6 +99,7 @@ body {
 .barrel.vertical.move1 {
     background-position: -96px -259px;
 }
+
 .barrel.vertical.move2 {
     background-position: -96px -270px;
 }
@@ -107,8 +110,8 @@ body {
 }
 
 .barrel.horizontal.move1 {
-     background-position: -66px -258px;
- }
+    background-position: -66px -258px;
+}
 
 .barrel.horizontal.move2 {
     background-position: -81px -258px;
@@ -122,18 +125,15 @@ body {
     background-position: -66px -270px;
 }
 
+/*------------------------------BARREL END------------------------------*/
+
+/*------------------------------MARIO------------------------------*/
+
 #mario {
     position: absolute;
     width: 16px;
     height: 16px;
     background-image: url("img/sprite.png");
-}
-
-#donkey {
-    position: absolute;
-    width: 47px;
-    height: 32px;
-    background: url("img/sprite.png") -108px -152px;
 }
 
 .right {
@@ -188,6 +188,18 @@ body {
     background-position: -132px -107px;
 }
 
+/*------------------------------MARIO END------------------------------*/
+
+
+/*------------------------------DONKEY------------------------------*/
+
+#donkey {
+    position: absolute;
+    width: 47px;
+    height: 32px;
+    background: url("img/sprite.png") -108px -152px;
+}
+
 .donkeyAngry.one {
     background-position: -154px -187px !important;
 }
@@ -207,3 +219,13 @@ body {
 .donkeyPrepare.two {
     background-position: -57px -152px !important;
 }
+
+.donkeyNewBarrel.take {
+    background-position: -9px -152px !important;
+}
+
+.donkeyNewBarrel.have {
+    background-position: -157px -152px !important;
+}
+
+/*------------------------------DONKEY END------------------------------*/

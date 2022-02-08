@@ -26,23 +26,22 @@ function startGame() {
 
     Donkey.create()
     donkey = new Donkey()
-    let b = new Barrel();
-    b.moving();
-    setInterval(()=>{
-    let b = new Barrel();
-    b.moving();
-},3000);
-
 
     window.requestAnimationFrame(playGame)
 }
 
-function playGame() {
-    animate()
-    donkey.angryAnimate()
-    donkey.prepare()
+let lastIntervalTimestamp = 0;
 
+function playGame(now) {
     window.requestAnimationFrame(playGame)
+
+    if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 20 * 1000) {
+        lastIntervalTimestamp = now;
+        if (!donkey.angry) donkey.attackD()
+    }
+    animate()
+
+    if (!donkey.takeBarrel) donkey.angryAnimate()
 }
 
 export function gameOver() {

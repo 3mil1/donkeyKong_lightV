@@ -10,11 +10,6 @@ export let plumber = {
     onFloor: 0,
 }
 
-
-const game = {
-    animation: null,
-}
-
 let mario
 export const animate = () => {
     mario = document.getElementById('mario');
@@ -31,7 +26,6 @@ export const animate = () => {
         } else {
             plumber.jump = false
         }
-
     })
 
     document.addEventListener('keyup', function (e) {
@@ -53,7 +47,8 @@ export const animate = () => {
             i = 0;
         }
     }, 200);
-    game.animation = window.requestAnimationFrame(move);
+    move()
+    // window.requestAnimationFrame(move);
 }
 const moves = ['move1', 'move2'];
 const directions = ['right', 'left', 'vertical'];
@@ -104,7 +99,7 @@ function move() {
         //clear all intervals
         console.log('game over');
     }
-    // game.animation = window.requestAnimationFrame(move);
+    // game.animation = window.reqquestAnimationFrame(move);
 }
 
 function jump() {

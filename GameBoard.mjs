@@ -21,6 +21,10 @@ class GameBoard {
                 div.classList.add(`floor${floor}`)
             }
 
+            if (CLASS_LIST[square] === 'barrel') {
+                div.classList.add(`stands`)
+            }
+
             if (CLASS_LIST[square] === 'ladder') {
                 div.classList.add(`floor${floor}`)
             }
