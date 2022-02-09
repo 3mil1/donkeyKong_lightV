@@ -84,8 +84,8 @@ body {
 }
 
 .barrel.stands {
-    width: 14px;
-    height: 16px;
+    width: 14px !important;
+    height: 16px !important;
     background-position: -111px -264px;
     position: relative;
 }
