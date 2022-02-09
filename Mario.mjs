@@ -32,12 +32,16 @@ export const animate = () => {
 
     document.addEventListener('keyup', function (e) {
         e.preventDefault()
-        plumber.moving = false;
+        let newMoving = false;
         if (e.code === 'KeyD') plumber.right = false;
         if (e.code === 'KeyA') plumber.left = false;
         if (e.code === 'KeyW') plumber.up = false;
         if (e.code === 'KeyS') plumber.down = false;
-        if (e.code === 'Space') plumber.jump = false;
+        if (e.code === 'Space') {
+            newMoving = plumber.moving;
+            plumber.jump = false;
+        }
+        plumber.moving = newMoving;
     })
     let i = 0;
     setInterval(() => {
@@ -108,9 +112,7 @@ function jump() {
     let platform = document.querySelectorAll(`.platform.floor${plumber.onFloor}`)
     let marioRect = mario.getBoundingClientRect()
 
-    return (
-        platform.item(0).getBoundingClientRect().top > marioRect.bottom
-    )
+    return platform.item(0).getBoundingClientRect().top > marioRect.bottom
 }
 
 function isCollide() {
@@ -230,11 +232,10 @@ function bump() {
     for (const barrel of barrels) {
         const b = barrel.getBoundingClientRect();
         if (!(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left) && !plumber.collideBump) {
-            plumber.collideBump = true
-            reduceLife()
+            plumber.collideBump = true;
+            reduceLife();
         }
     }
-    return false;
 }
 
 function reduceLife() {
