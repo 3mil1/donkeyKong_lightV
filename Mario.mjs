@@ -224,11 +224,12 @@ function changeFloor() {
 
 function bump() {
     let mRect = mario.getBoundingClientRect();
-    let barrels = document.querySelectorAll('.barrel');
+    let barrels = Array.from(document.querySelectorAll('.barrel.vertical'));
     for (const barrel of barrels) {
         const b = barrel.getBoundingClientRect();
-        return !(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left);
-        // return mRect.top > b.bottom || mRect.bottom < b.top
+        if  (!(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left)) {
+            return true
+        }
     }
     return false;
 }
