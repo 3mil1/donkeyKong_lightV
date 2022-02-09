@@ -17,12 +17,22 @@ export const animate = () => {
     mario = document.getElementById('mario');
     document.addEventListener("keydown", (e) => {
         e.preventDefault()
-        plumber.moving = true;
-        if (e.code === 'KeyD') plumber.right = true;
-        if (e.code === 'KeyA') plumber.left = true;
-        if (e.code === 'KeyW') plumber.up = true;
-        if (e.code === 'KeyS') plumber.down = true;
-
+        if (e.code === 'KeyD') {
+            plumber.right = true;
+            plumber.moving = true;
+        }
+        if (e.code === 'KeyA') {
+            plumber.left = true;
+            plumber.moving = true;
+        }
+        if (e.code === 'KeyW') {
+            plumber.up = true;
+            plumber.moving = true;
+        }
+        if (e.code === 'KeyS') {
+            plumber.down = true;
+            plumber.moving = true;
+        }
         if (!e.repeat) {
             if (e.code === 'Space') plumber.jump = true
         } else {
