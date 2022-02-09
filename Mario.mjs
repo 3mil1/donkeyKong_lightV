@@ -239,5 +239,7 @@ function bump() {
 
 function reduceLife() {
     plumber.lives--
-    plumber.collideBump = false
+    setTimeout(() => {
+        plumber.collideBump = false
+    },1111)
 }

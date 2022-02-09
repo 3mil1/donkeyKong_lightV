@@ -39,7 +39,9 @@ let lastIntervalTimestamp = 0;
 function playGame(now) {
     window.requestAnimationFrame(playGame)
 
-    if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 20 * 1000) {
+
+    // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
+    if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
         lastIntervalTimestamp = now;
         if (!donkey.angry) donkey.attackD()
     }
