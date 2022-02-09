@@ -226,7 +226,7 @@ function changeFloor() {
 
 function bump() {
     let mRect = mario.getBoundingClientRect();
-    let barrels = document.querySelectorAll('.barrel:not(.stands)');
+    let barrels = Array.from(document.querySelectorAll('.barrel.vertical'));
     for (const barrel of barrels) {
         const b = barrel.getBoundingClientRect();
         if (!(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left) && !plumber.collideBump) {
@@ -234,6 +234,7 @@ function bump() {
             reduceLife()
         }
     }
+    return false;
 }
 
 function reduceLife() {
