@@ -128,7 +128,6 @@ function isCollide() {
         }
     }
 
-
     // falling down from platform
     if (!(marioRect.right - 10 >= platform.item(0).getBoundingClientRect().left && (marioRect.left + 10) <= platform.item(platform.length - 1).getBoundingClientRect().right)) {
         mario.style.top = parseInt(mario.style.top, 10) + 3 + 'px'
@@ -228,7 +227,7 @@ function bump() {
     let barrels = document.querySelectorAll('.barrel');
     for (const barrel of barrels) {
         const b = barrel.getBoundingClientRect();
-         return !(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left);
+        return !(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left);
         // return mRect.top > b.bottom || mRect.bottom < b.top
     }
     return false;

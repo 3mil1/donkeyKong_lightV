@@ -5,12 +5,14 @@ import GameBoard from "./GameBoard.mjs";
 import {animate} from "./Mario.mjs";
 import Donkey from "./donkey.mjs";
 import Barrel from "./barrel.mjs";
+import Princess from "./princess.mjs";
 
 
 // game const
 const startGameBtn = document.querySelector("#start-button")
 const gameGrid = document.querySelector("#game")
 let donkey
+let princess
 
 
 function startGame() {
@@ -27,6 +29,8 @@ function startGame() {
     Donkey.create()
     donkey = new Donkey()
 
+    princess = new Princess()
+
     window.requestAnimationFrame(playGame)
 }
 
@@ -42,6 +46,9 @@ function playGame(now) {
     animate()
 
     if (!donkey.takeBarrel) donkey.angryAnimate()
+
+
+    princess.move()
 }
 
 export function gameOver() {

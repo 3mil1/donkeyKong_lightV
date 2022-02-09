@@ -57,7 +57,6 @@ class Donkey {
 
     takeNewBarrel() {
         if (this.takeBarrel) {
-            console.log('new barrel')
             let x = 0
             let i = 0;
             let intervalID = setInterval(() => {

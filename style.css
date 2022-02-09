@@ -84,9 +84,9 @@ body {
 }
 
 .barrel.stands {
-    width: 10px;
+    width: 14px;
     height: 16px;
-    background-position: -113px -264px;
+    background-position: -111px -264px;
     position: relative;
 }
 
@@ -197,7 +197,7 @@ body {
     position: absolute;
     width: 47px;
     height: 32px;
-    background: url("img/sprite.png") -108px -152px;
+    background: url("img/sprite.png") -107px -152px;
 }
 
 .donkeyAngry.one {
@@ -229,3 +229,23 @@ body {
 }
 
 /*------------------------------DONKEY END------------------------------*/
+
+/*------------------------------PRINCESS------------------------------*/
+
+#princess {
+    position: absolute;
+    width: 15px;
+    height: 22px;
+    background-image: url("img/sprite.png");
+    background-position: -158px -126px;
+}
+
+#princess.first {
+    background-position: -158px -126px;
+}
+
+#princess.second {
+    background-position: -184px -126px !important;
+}
+
+/*------------------------------PRINCESS END------------------------------*/

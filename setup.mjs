@@ -1,6 +1,6 @@
 export const GRID_SIZE = 16
 export const CELL_SIZE = 16
-export const FLOORS = 3
+export const FLOORS = 4
 
 export const OBJECT_TYPE = {
     BLANK: 'blank',
@@ -8,9 +8,9 @@ export const OBJECT_TYPE = {
     LADDER: 'ladder',
     BARREL: 'barrel',
     DONKEY: 'donkey',
-    PRINCESS: 'princess',
+    PRINCESS: 'princessPos',
     MARIO: 'marioStart',
-    HOLE: 'hole'
+    HOLE: 'hole',
 }
 
 export const CLASS_LIST = [
@@ -25,11 +25,12 @@ export const CLASS_LIST = [
 ]
 
 export const LEVEL = [
-    // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     // 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0,
+    0, 0, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+    0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
