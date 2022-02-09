@@ -1,4 +1,4 @@
-import {LEVEL, OBJECT_TYPE} from "./setup.mjs";
+import {FLOORS, LEVEL, OBJECT_TYPE} from "./setup.mjs";
 import {plumber} from "./Mario.mjs";
 // Classes
 import GameBoard from "./GameBoard.mjs";
@@ -46,9 +46,9 @@ function playGame(now) {
     animate()
 
     if (!donkey.takeBarrel) donkey.angryAnimate()
-
-
     princess.move()
+
+    playerWon()
 }
 
 export function gameOver() {
@@ -57,6 +57,12 @@ export function gameOver() {
         div.innerHTML = ''
         alert("Game over")
         startGameBtn.classList.remove('hide')
+    }
+}
+
+function playerWon() {
+    if (Number(plumber.onFloor) === FLOORS - 1) {
+        alert('U won')
     }
 }
 

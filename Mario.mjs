@@ -1,6 +1,7 @@
 import {gameOver} from "./index.mjs";
 
 export let plumber = {
+    lives: 3,
     right: false,
     left: false,
     moving: false,
@@ -8,6 +9,7 @@ export let plumber = {
     down: false,
     jump: false,
     onFloor: 0,
+    collideBump: false
 }
 
 let mario
@@ -94,10 +96,10 @@ function move() {
 
     changeFloor()
     isCollide()
-    if (bump()) {
-        //game over
-        //clear all intervals
-        console.log('game over');
+    bump()
+
+    if (plumber.lives === 0) {
+        console.log('game over')
     }
     // game.animation = window.reqquestAnimationFrame(move);
 }
@@ -224,11 +226,17 @@ function changeFloor() {
 
 function bump() {
     let mRect = mario.getBoundingClientRect();
-    let barrels = document.querySelectorAll('.barrel');
+    let barrels = document.querySelectorAll('.barrel:not(.stands)');
     for (const barrel of barrels) {
         const b = barrel.getBoundingClientRect();
-        return !(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left);
-        // return mRect.top > b.bottom || mRect.bottom < b.top
+        if (!(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left) && !plumber.collideBump) {
+            plumber.collideBump = true
+            reduceLife()
+        }
     }
-    return false;
+}
+
+function reduceLife() {
+    plumber.lives--
+    plumber.collideBump = false
 }
