@@ -125,7 +125,7 @@ body {
     background-position: -66px -270px;
 }
 
-.barrel.explode.one {
+.barrel.explode, .barrel.explode.one {
     width: 36px;
     height: 36px;
     background: url("img/explosion.png") 0 -11px;

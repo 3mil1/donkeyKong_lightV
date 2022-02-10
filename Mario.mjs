@@ -42,19 +42,17 @@ export const animate = () => {
 
     document.addEventListener('keyup', function (e) {
         e.preventDefault()
-        plumber.moving = false
         let newMoving = false;
         if (e.code === 'KeyD') plumber.right = false;
         if (e.code === 'KeyA') plumber.left = false;
         if (e.code === 'KeyW') plumber.up = false;
         if (e.code === 'KeyS') plumber.down = false;
-        if (e.code === 'Space') plumber.jump = false;
 
-        // if (e.code === 'Space') {
-        //     newMoving = plumber.moving;
-        //     plumber.jump = false;
-        // }
-        // plumber.moving = newMoving;
+        if (e.code === 'Space') {
+            newMoving = plumber.moving;
+            plumber.jump = false;
+        }
+        plumber.moving = newMoving;
     })
     let i = 0;
     setInterval(() => {
@@ -113,7 +111,7 @@ function move() {
 
     changeFloor()
     isCollide()
-    bump()
+    bump();
 
     if (plumber.lives === 0) {
         console.log('game over')
@@ -241,15 +239,37 @@ function changeFloor() {
 
 }
 
+let brakeMoves = ['one', 'two', 'three', 'four', 'five'];
+
 export function bump() {
     let mRect = mario.getBoundingClientRect();
     let barrels = Array.from(document.querySelectorAll('.barrel.vertical'));
     for (const barrel of barrels) {
-        const b = barrel.getBoundingClientRect();
+        let b = barrel.getBoundingClientRect();
         if (!(mRect.top > b.bottom || mRect.bottom < b.top || mRect.left > b.right || mRect.right < b.left) && !plumber.collideBump) {
             plumber.collideBump = true;
+
+            barrel.classList.remove('vertical', 'move1', 'move2');
+            barrel.classList.add('explode');
+            clearInterval(Number.parseInt(barrel.dataset.intervalID));
+            console.log(barrel);
+            console.log(barrel.dataset.intervalID);
             reduceLife();
-            return true
+
+            let x = 0;
+            let i = 0;
+
+            let intervalID = setInterval(() => {
+                barrel.classList.remove(...brakeMoves);
+                barrel.classList.add(brakeMoves[i % brakeMoves.length]);
+                i++;
+
+                if (++x === 5) {
+                    barrel.remove();
+                    window.clearInterval(intervalID);
+                }
+            }, 100);
+            return true;
         }
     }
     return false;
