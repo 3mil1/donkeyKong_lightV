@@ -19,7 +19,6 @@ function startGame() {
     startGameBtn.classList.add('hide')
     GameBoard.createGameBoard(gameGrid, LEVEL)
 
-
     let mario = document.createElement("div")
     mario.id = "mario"
     mario.classList.add('right');
@@ -30,7 +29,6 @@ function startGame() {
     donkey = new Donkey()
 
     princess = new Princess()
-
     window.requestAnimationFrame(playGame)
 }
 

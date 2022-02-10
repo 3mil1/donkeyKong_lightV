@@ -73,7 +73,7 @@ class Donkey {
                     window.clearInterval(intervalID)
 
                     this.throwBarrel = true
-                    let b = new Barrel();
+                    let b = new Barrel()
                     b.moving();
                 }
             }, 600);

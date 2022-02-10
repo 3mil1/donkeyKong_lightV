@@ -1,3 +1,5 @@
+import {bump, plumber} from "./Mario.mjs";
+
 class Barrel {
     constructor() {
         this.game = document.getElementById('game')
@@ -8,6 +10,7 @@ class Barrel {
         this.barrel.style.left = donkey.offsetLeft + 13 + 'px';
         this.game.appendChild(this.barrel);
         this.moves = ['move1', 'move2'];
+        this.brakeMoves = ['one', 'two', 'three', 'four', 'five']
     }
 
     moving() {
@@ -25,11 +28,45 @@ class Barrel {
             this.barrel.classList.remove(...this.moves);
             this.barrel.classList.add(this.moves[i % this.moves.length]);
             i++;
+
+            if (bump()) {
+                this.explode(this.barrel.getBoundingClientRect())
+                this.barrel.remove();
+            }
+
             if (this.barrel.offsetLeft < 0 || this.barrel.offsetLeft + 15 > gR.width || this.barrel.offsetTop + 15 > gR.bottom) {
                 clearInterval(iId);
                 this.barrel.remove();
             }
 
+        }, 100);
+    }
+
+    explode(barrelRect) {
+        let explodedBarrel = document.createElement('div')
+        explodedBarrel.classList.add('barrel', 'explode')
+        let mario = document.getElementById('mario');
+        let mRect = mario.getBoundingClientRect();
+        explodedBarrel.style.left = mRect.left + 'px'
+        explodedBarrel.style.top = mRect.top + 'px',
+
+
+        console.log(explodedBarrel.style.left)
+        console.log(explodedBarrel.style.top)
+
+        this.game.appendChild(explodedBarrel)
+
+        let x = 0
+        let i = 0;
+        let intervalID = setInterval(() => {
+            explodedBarrel.classList.remove(...this.brakeMoves)
+            explodedBarrel.classList.add(this.brakeMoves[i % this.brakeMoves.length])
+            i++
+
+            if (++x === 5) {
+                explodedBarrel.remove()
+                window.clearInterval(intervalID)
+            }
         }, 100);
     }
 }

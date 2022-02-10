@@ -125,6 +125,36 @@ body {
     background-position: -66px -270px;
 }
 
+.barrel.explode.one {
+    width: 36px;
+    height: 36px;
+    background: url("img/explosion.png") 0 -11px;
+}
+
+.barrel.explode.two {
+    width: 44px;
+    height: 47px;
+    background: url("img/explosion.png") -41px -7px;
+}
+
+.barrel.explode.three {
+    width: 56px;
+    height: 55px;
+    background: url("img/explosion.png") -90px -4px;
+}
+
+.barrel.explode.four {
+    width: 63px;
+    height: 67px;
+    background: url("img/explosion.png") -153px 7px;
+}
+
+.barrel.explode.five {
+    width: 50px;
+    height: 24px;
+    background: url("img/explosion.png") -224px -25px;
+}
+
 /*------------------------------BARREL END------------------------------*/
 
 /*------------------------------MARIO------------------------------*/
