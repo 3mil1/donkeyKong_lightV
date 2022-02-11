@@ -215,13 +215,13 @@ function canClimbUp() {
         ladderEl.getBoundingClientRect().bottom
 
     }
-
     return false
 }
 
 function changeFloor() {
     let floor = document.querySelectorAll(".platform[class*=floor]")
     let marioRect = mario.getBoundingClientRect()
+
 
     for (let i = floor.length - 1; i >= 0; i--) {
         if ((marioRect.bottom + 4) === floor.item(i).getBoundingClientRect().top
@@ -239,7 +239,7 @@ function changeFloor() {
 
 }
 
-let brakeMoves = ['one', 'two', 'three', 'four', 'five'];
+let brakeMoves = ['one', 'two', 'three', 'four', 'five', 'six'];
 
 export function bump() {
     let mRect = mario.getBoundingClientRect();
@@ -252,8 +252,6 @@ export function bump() {
             barrel.classList.remove('vertical', 'move1', 'move2');
             barrel.classList.add('explode');
             clearInterval(Number.parseInt(barrel.dataset.intervalID));
-            console.log(barrel);
-            console.log(barrel.dataset.intervalID);
             reduceLife();
 
             let x = 0;
@@ -264,7 +262,7 @@ export function bump() {
                 barrel.classList.add(brakeMoves[i % brakeMoves.length]);
                 i++;
 
-                if (++x === 5) {
+                if (++x === 7) {
                     barrel.remove();
                     window.clearInterval(intervalID);
                 }

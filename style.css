@@ -130,33 +130,39 @@ body {
 }
 
 .barrel.explode.one {
-    width: 36px;
-    height: 36px;
-    background: url("img/explosion.png") 0 -11px;
+    width: 24px;
+    height: 24px;
+    background: url("img/explosion.png") 1px 0
 }
 
 .barrel.explode.two {
-    width: 44px;
-    height: 47px;
-    background: url("img/explosion.png") -41px -7px;
+    width: 24px;
+    height: 24px;
+    background: url("img/explosion.png") -24px -0
 }
 
 .barrel.explode.three {
-    width: 56px;
-    height: 55px;
-    background: url("img/explosion.png") -90px -4px;
+    width: 24px;
+    height: 24px;
+    background: url("img/explosion.png") -47px 0
 }
 
 .barrel.explode.four {
-    width: 63px;
-    height: 67px;
-    background: url("img/explosion.png") -153px 7px;
+    width: 24px;
+    height: 24px;
+    background: url("img/explosion.png") -72px 0
 }
 
 .barrel.explode.five {
-    width: 50px;
+    width: 24px;
     height: 24px;
-    background: url("img/explosion.png") -224px -25px;
+    background: url("img/explosion.png") -96px 0
+}
+
+.barrel.explode.six {
+    width: 24px;
+    height: 24px;
+    background: url("img/explosion.png") -119px 0px
 }
 
 /*------------------------------BARREL END------------------------------*/
