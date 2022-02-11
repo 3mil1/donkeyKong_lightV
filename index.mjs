@@ -6,6 +6,7 @@ import {animate} from "./Mario.mjs";
 import Donkey from "./donkey.mjs";
 import Barrel from "./barrel.mjs";
 import Princess from "./princess.mjs";
+import GamePause from "./gamePause.mjs";
 
 
 // game const
@@ -14,13 +15,14 @@ const gameGrid = document.querySelector("#game")
 let gameStatus = document.querySelector('.game-status');
 let donkey
 let princess
+export const pauseGame = new GamePause()
 
 
 function startGame() {
     startGameBtn.classList.add('hide')
     gameStatus.style.display = "block";
     GameBoard.createGameBoard(gameGrid, LEVEL)
-    startTimer(0,0);
+    startTimer(0, 0);
 
     let mario = document.createElement("div")
     mario.id = "mario"
@@ -30,28 +32,45 @@ function startGame() {
 
     Donkey.create()
     donkey = new Donkey()
-
     princess = new Princess()
+
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape') {
+            pauseGame.pause()
+            if (pauseGame.isPaused()) {
+                let body = document.querySelector('body')
+                let div = document.createElement('div')
+                div.classList.add('bg-fon')
+                body.appendChild(div)
+            } else {
+                let div = document.querySelector('.bg-fon')
+                div.remove()
+            }
+        }
+    })
     window.requestAnimationFrame(playGame)
 }
 
 let lastIntervalTimestamp = 0;
 
 function playGame(now) {
-    window.requestAnimationFrame(playGame)
 
+    if (!pauseGame.isPaused()) {
+        // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
+        if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
+            lastIntervalTimestamp = now;
+            if (!donkey.angry) donkey.attackD()
+        }
 
-    // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
-    if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
-        lastIntervalTimestamp = now;
-        if (!donkey.angry) donkey.attackD()
+        if (!donkey.takeBarrel) donkey.angryAnimate()
+        princess.animate()
+
+        playerWon()
     }
     animate()
 
-    if (!donkey.takeBarrel) donkey.angryAnimate()
-    princess.move()
 
-    playerWon()
+    window.requestAnimationFrame(playGame)
 }
 
 export function gameOver() {
@@ -87,7 +106,6 @@ function startTimer(minute, second) {
         startTimer(minute, second);
     }, 1000);
 }
-
 
 
 // events

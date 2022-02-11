@@ -1,5 +1,6 @@
 import {plumber} from "./Mario.mjs";
 import Barrel from "./barrel.mjs";
+import {pauseGame} from "./index.mjs";
 
 let startFloor = 0
 
@@ -41,11 +42,17 @@ class Donkey {
         this.takeBarrel = true
         let x = 0
         let i = 0;
+
         let intervalID = setInterval(() => {
             this.me.classList.add('donkeyPrepare')
             this.me.classList.remove(...this.movesPrepare)
             this.me.classList.add(this.movesPrepare[i % this.movesPrepare.length])
             i++
+
+            if (pauseGame.isPaused()) {
+                window.clearInterval(intervalID)
+            }
+
             if (++x === 10) {
                 this.me.classList.remove('donkeyPrepare')
                 this.me.classList.remove(...this.movesPrepare)
@@ -53,6 +60,8 @@ class Donkey {
                 this.takeNewBarrel()
             }
         }, 300);
+
+
     }
 
     takeNewBarrel() {
@@ -65,6 +74,12 @@ class Donkey {
                 this.me.style.width = '43px'
                 this.me.classList.add(this.movesNewBarrel[i % this.movesNewBarrel.length])
                 i++
+
+                if (pauseGame.isPaused()) {
+                    window.clearInterval(intervalID)
+                }
+
+
                 if (++x === 3) {
                     this.me.style.width = '47px'
                     this.me.classList.remove('donkeyNewBarrel')
@@ -81,7 +96,7 @@ class Donkey {
     }
 
     attackD() {
-        this.prepare()
+        if (!pauseGame.isPaused()) this.prepare()
     }
 
     static create() {

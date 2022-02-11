@@ -1,4 +1,5 @@
-import {gameOver} from "./index.mjs";
+import {gameOver, pauseGame} from "./index.mjs";
+import gamePause from "./gamePause.mjs";
 
 export let plumber = {
     lives: 3,
@@ -14,46 +15,15 @@ export let plumber = {
 
 let mario
 export const animate = () => {
+    if (pauseGame.isPaused()) {
+        document.removeEventListener("keydown", moveMario)
+    } else {
+        document.addEventListener("keydown", moveMario)
+        document.addEventListener('keyup', stopMoveMario)
+    }
+
     mario = document.getElementById('mario');
-    document.addEventListener("keydown", (e) => {
-        e.preventDefault()
-        if (e.code === 'KeyD') {
-            plumber.right = true;
-            plumber.moving = true;
-        }
-        if (e.code === 'KeyA') {
-            plumber.left = true;
-            plumber.moving = true;
-        }
-        if (e.code === 'KeyW') {
-            plumber.up = true;
-            plumber.moving = true;
-        }
-        if (e.code === 'KeyS') {
-            plumber.down = true;
-            plumber.moving = true;
-        }
-        if (!e.repeat) {
-            if (e.code === 'Space') plumber.jump = true
-        } else {
-            plumber.jump = false
-        }
-    })
 
-    document.addEventListener('keyup', function (e) {
-        e.preventDefault()
-        let newMoving = false;
-        if (e.code === 'KeyD') plumber.right = false;
-        if (e.code === 'KeyA') plumber.left = false;
-        if (e.code === 'KeyW') plumber.up = false;
-        if (e.code === 'KeyS') plumber.down = false;
-
-        if (e.code === 'Space') {
-            newMoving = plumber.moving;
-            plumber.jump = false;
-        }
-        plumber.moving = newMoving;
-    })
     let i = 0;
     setInterval(() => {
         mario.classList.remove(...moves)
@@ -67,6 +37,48 @@ export const animate = () => {
     move()
     // window.requestAnimationFrame(move);
 }
+
+function moveMario(e) {
+    e.preventDefault()
+    if (e.code === 'KeyD') {
+        plumber.right = true;
+        plumber.moving = true;
+    }
+    if (e.code === 'KeyA') {
+        plumber.left = true;
+        plumber.moving = true;
+    }
+    if (e.code === 'KeyW') {
+        plumber.up = true;
+        plumber.moving = true;
+    }
+    if (e.code === 'KeyS') {
+        plumber.down = true;
+        plumber.moving = true;
+    }
+    if (!e.repeat) {
+        if (e.code === 'Space') plumber.jump = true
+    } else {
+        plumber.jump = false
+    }
+}
+
+function stopMoveMario(e) {
+    e.preventDefault()
+    let newMoving = false;
+    if (e.code === 'KeyD') plumber.right = false;
+    if (e.code === 'KeyA') plumber.left = false;
+    if (e.code === 'KeyW') plumber.up = false;
+    if (e.code === 'KeyS') plumber.down = false;
+
+    if (e.code === 'Space') {
+        newMoving = plumber.moving;
+        plumber.jump = false;
+    }
+    plumber.moving = newMoving;
+}
+
+
 const moves = ['move1', 'move2'];
 const directions = ['right', 'left', 'vertical'];
 

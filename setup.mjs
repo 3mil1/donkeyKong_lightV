@@ -8,7 +8,7 @@ export const OBJECT_TYPE = {
     LADDER: 'ladder',
     BARREL: 'barrel',
     DONKEY: 'donkey',
-    PRINCESS: 'princessPos',
+    PRINCESS: 'princessStart',
     MARIO: 'marioStart',
     HOLE: 'hole',
 }

@@ -7,6 +7,15 @@ body {
     background-size: cover;
 }
 
+.bg-fon {
+    background-color:rgba(0,0,0,.7);
+    height:100%;
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+}
+
 #wrapper {
     position: relative;
     display: flex;

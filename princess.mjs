@@ -1,8 +1,9 @@
 import {FLOORS} from "./setup.mjs";
-import {plumber} from "./Mario.mjs";
+import {pauseGame} from "./index.mjs";
 
 class Princess {
     constructor() {
+        this.moveAnimate = false
         this.free = false
         this.onFloor = FLOORS - 1
         this.movePos = ['first', 'second']
@@ -15,11 +16,12 @@ class Princess {
         if (!this.exist) {
             let princess = document.createElement("div")
             princess.id = "princess"
-            let princessPos = document.querySelector('.princessPos')
+            let princessPos = document.querySelector('.princessStart')
             princessPos.appendChild(princess)
             this.exist = true
             this.me = document.getElementById('princess')
             this.me.style.top = '10px'
+
             this.animate()
         }
     }
@@ -48,13 +50,23 @@ class Princess {
     }
 
     animate() {
-        let i = 0;
-        let intervalID = setInterval(() => {
-            this.me.classList.remove(...this.movePos)
-            this.moveLeft ? this.me.style.transform = 'scaleX(-1)' : this.me.style.transform = 'scaleX(1)'
-            this.me.classList.add(this.movePos[i % this.movePos.length])
-            i++
-        }, 150);
+        this.move()
+        if (!this.moveAnimate) {
+            this.moveAnimate = true
+            let i = 0;
+            let intervalID = setInterval(() => {
+                this.me.classList.remove(...this.movePos)
+                this.moveLeft ? this.me.style.transform = 'scaleX(-1)' : this.me.style.transform = 'scaleX(1)'
+                this.me.classList.add(this.movePos[i % this.movePos.length])
+                i++
+
+                if (pauseGame.isPaused()) {
+                    this.moveAnimate = false
+                    window.clearInterval(intervalID)
+                }
+
+            }, 150);
+        }
     }
 }
 
