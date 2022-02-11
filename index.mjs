@@ -11,13 +11,16 @@ import Princess from "./princess.mjs";
 // game const
 const startGameBtn = document.querySelector("#start-button")
 const gameGrid = document.querySelector("#game")
+let gameStatus = document.querySelector('.game-status');
 let donkey
 let princess
 
 
 function startGame() {
     startGameBtn.classList.add('hide')
+    gameStatus.style.display = "block";
     GameBoard.createGameBoard(gameGrid, LEVEL)
+    startTimer(0,0);
 
     let mario = document.createElement("div")
     mario.id = "mario"
@@ -65,6 +68,26 @@ function playerWon() {
         alert('U won')
     }
 }
+
+const timer = document.getElementById('timer');
+let timeInt;
+
+function startTimer(minute, second) {
+    clearInterval(timeInt);
+    timer.textContent =
+        (minute < 10 ? '0' + minute : minute) +
+        ':' +
+        (second < 10 ? '0' + second : second);
+    second++;
+    if (second === 60) {
+        minute++;
+        second = 0;
+    }
+    timeInt = setInterval(() => {
+        startTimer(minute, second);
+    }, 1000);
+}
+
 
 
 // events

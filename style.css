@@ -24,11 +24,11 @@ body {
 .game-status {
     position: absolute;
     top: 0;
-    left: 0;
-    display: flex;
+    left: 10px;
+    display: none;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 30%;
     height: 50px;
     border: 5px darkblue solid;
     background: black;
@@ -125,7 +125,7 @@ body {
     background-position: -66px -270px;
 }
 
-.barrel.explode, .barrel.explode.one {
+.barrel.explode.one {
     width: 36px;
     height: 36px;
     background: url("img/explosion.png") 0 -11px;
