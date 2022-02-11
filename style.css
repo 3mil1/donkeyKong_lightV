@@ -55,6 +55,10 @@ body {
     margin-top: 20px;
 }
 
+#timer {
+    display: inline-block;
+}
+
 .hide {
     display: none;
 }
