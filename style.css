@@ -16,6 +16,12 @@ body {
     left:0;
 }
 
+.pause {
+    z-index: 100;
+    position: absolute;
+    color: white;
+}
+
 #wrapper {
     position: relative;
     display: flex;

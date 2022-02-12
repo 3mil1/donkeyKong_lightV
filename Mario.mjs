@@ -14,7 +14,7 @@ export let plumber = {
 }
 
 let mario
-export const animate = () => {
+export const animateMario = () => {
     if (pauseGame.isPaused()) {
         document.removeEventListener("keydown", moveMario)
     } else {

@@ -16,26 +16,27 @@ class Donkey {
     }
 
     angryAnimate() {
-        if (plumber.onFloor > startFloor) {
-            this.angry = true
-            let x = 0
-            let i = 0;
-            let intervalID = setInterval(() => {
-                this.me.classList.add('donkeyAngry')
-                this.me.style.transform = 'scaleY(-1)'
-                this.me.classList.remove(...this.movesAngry)
-                this.me.classList.add(this.movesAngry[i % this.movesAngry.length])
-                i++
+            if (plumber.onFloor > startFloor) {
+                this.angry = true
+                let x = 0
+                let i = 0;
+                let intervalID = setInterval(() => {
+                    this.me.classList.add('donkeyAngry')
+                    this.me.style.transform = 'scaleY(-1)'
+                    this.me.classList.remove(...this.movesAngry)
+                    this.me.classList.add(this.movesAngry[i % this.movesAngry.length])
+                    i++
 
-                if (++x === 10) {
-                    this.me.classList.remove('donkeyAngry')
-                    this.me.style.transform = 'scaleY(1)'
-                    window.clearInterval(intervalID)
-                    this.angry = false
-                }
-            }, 150);
-            startFloor = plumber.onFloor
-        }
+                    if (++x === 10) {
+                        this.me.classList.remove('donkeyAngry')
+                        this.me.style.transform = 'scaleY(1)'
+                        window.clearInterval(intervalID)
+                        this.angry = false
+                    }
+                }, 150);
+                startFloor = plumber.onFloor
+            }
+
     }
 
     prepare() {
@@ -78,7 +79,6 @@ class Donkey {
                 if (pauseGame.isPaused()) {
                     window.clearInterval(intervalID)
                 }
-
 
                 if (++x === 3) {
                     this.me.style.width = '47px'

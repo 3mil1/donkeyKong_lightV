@@ -2,7 +2,7 @@ import {FLOORS, LEVEL, OBJECT_TYPE} from "./setup.mjs";
 import {plumber} from "./Mario.mjs";
 // Classes
 import GameBoard from "./GameBoard.mjs";
-import {animate} from "./Mario.mjs";
+import {animateMario} from "./Mario.mjs";
 import Donkey from "./donkey.mjs";
 import Barrel from "./barrel.mjs";
 import Princess from "./princess.mjs";
@@ -13,6 +13,7 @@ import GamePause from "./gamePause.mjs";
 const startGameBtn = document.querySelector("#start-button")
 const gameGrid = document.querySelector("#game")
 let gameStatus = document.querySelector('.game-status');
+let pause = document.querySelector('.pause')
 let donkey
 let princess
 export const pauseGame = new GamePause()
@@ -53,9 +54,23 @@ function startGame() {
 
 let lastIntervalTimestamp = 0;
 
+
+function pauseMenu() {
+    pause.classList.remove('hide')
+    let restartBtn = document.querySelector('#restart-button')
+
+
+    // restartBtn.addEventListener('click', () => {
+    //     startGame()
+    //
+    // })
+}
+
 function playGame(now) {
+    if (pauseGame.isPaused()) pauseMenu()
 
     if (!pauseGame.isPaused()) {
+        pause.classList.add('hide')
         // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
         if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
             lastIntervalTimestamp = now;
@@ -67,7 +82,8 @@ function playGame(now) {
 
         playerWon()
     }
-    animate()
+
+    animateMario()
 
 
     window.requestAnimationFrame(playGame)
