@@ -6,14 +6,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
 <div id="wrapper">
     <div class="game-status">
-        Time:
         <div id="timer">00:00</div>
     </div>
     <div id="game"></div>
-    <div class="pause hide">Pause <button id="restart-button">restart</button></div>
+    <div class="pause hide">
+        <div class="manuStatus"></div>
+        <button id="restart-button">restart</button>
+    </div>
     <button id="start-button">Start Game</button>
+
 </div>
 
 <script type="module" src="index.mjs"></script>

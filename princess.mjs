@@ -50,7 +50,12 @@ class Princess {
     }
 
     animate() {
-        this.move()
+        // if(pauseGame.isPaused()) {
+        // }
+
+            this.move()
+
+
         if (!this.moveAnimate) {
             this.moveAnimate = true
             let i = 0;

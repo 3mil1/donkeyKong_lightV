@@ -1,5 +1,5 @@
 import {FLOORS, LEVEL, OBJECT_TYPE} from "./setup.mjs";
-import {plumber} from "./Mario.mjs";
+import {moveMario, plumber, showLives} from "./Mario.mjs";
 // Classes
 import GameBoard from "./GameBoard.mjs";
 import {animateMario} from "./Mario.mjs";
@@ -18,10 +18,18 @@ let donkey
 let princess
 export const pauseGame = new GamePause()
 
+window.addEventListener('keydown', esc)
+
+function esc(e) {
+    if (e.code === 'Escape') {
+        gameMenu('pause')
+    }
+}
+
 
 function startGame() {
     startGameBtn.classList.add('hide')
-    gameStatus.style.display = "block";
+    gameStatus.style.display = "flex";
     GameBoard.createGameBoard(gameGrid, LEVEL)
     startTimer(0, 0);
 
@@ -35,31 +43,48 @@ function startGame() {
     donkey = new Donkey()
     princess = new Princess()
 
-    window.addEventListener('keydown', (e) => {
-        if (e.code === 'Escape') {
-            pauseGame.pause()
-            if (pauseGame.isPaused()) {
-                let body = document.querySelector('body')
-                let div = document.createElement('div')
-                div.classList.add('bg-fon')
-                body.appendChild(div)
-            } else {
-                let div = document.querySelector('.bg-fon')
-                div.remove()
-            }
-        }
-    })
+    showLives()
+
     window.requestAnimationFrame(playGame)
 }
 
 let lastIntervalTimestamp = 0;
 
 
-function pauseMenu() {
+function gameMenu(gameStatus) {
     pause.classList.remove('hide')
     let restartBtn = document.querySelector('#restart-button')
+    let menuStatus = document.querySelector('.manuStatus')
 
+    switch (gameStatus) {
+        case "over":
+            plumber.gameOver = true
+            menuStatus.textContent = "GAME OVER"
+            gameStatus = 'over'
+            break
+        case "pause":
+            menuStatus.textContent = "PAUSE"
+            break
+        case "win":
+            menuStatus.textContent = "YOU WIN"
+            gameStatus = 'win'
+    }
 
+    if (gameStatus !== 'pause') {
+        window.removeEventListener('keydown', esc)
+    }
+
+    pauseGame.pause()
+    document.removeEventListener("keydown", moveMario)
+    if (pauseGame.isPaused()) {
+        let body = document.querySelector('body')
+        let div = document.createElement('div')
+        div.classList.add('bg-fon')
+        body.appendChild(div)
+    } else if (!pauseGame.isPaused()) {
+        let div = document.querySelector('.bg-fon')
+        div.remove()
+    }
     // restartBtn.addEventListener('click', () => {
     //     startGame()
     //
@@ -67,40 +92,38 @@ function pauseMenu() {
 }
 
 function playGame(now) {
-    if (pauseGame.isPaused()) pauseMenu()
+    if (!plumber.gameOver) {
+        if (!pauseGame.isPaused()) {
+            pause.classList.add('hide')
+            // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
+            if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
+                lastIntervalTimestamp = now;
+                if (!donkey.angry) donkey.attackD()
+            }
 
-    if (!pauseGame.isPaused()) {
-        pause.classList.add('hide')
-        // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
-        if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
-            lastIntervalTimestamp = now;
-            if (!donkey.angry) donkey.attackD()
+            if (!donkey.takeBarrel) donkey.angryAnimate()
+            princess.animate()
+
+            animateMario()
+            playerWon()
+            gameOver()
         }
-
-        if (!donkey.takeBarrel) donkey.angryAnimate()
-        princess.animate()
-
-        playerWon()
     }
-
-    animateMario()
 
 
     window.requestAnimationFrame(playGame)
+
 }
 
 export function gameOver() {
-    if (plumber.onFloor === -1) {
-        let div = document.getElementById('game')
-        div.innerHTML = ''
-        alert("Game over")
-        startGameBtn.classList.remove('hide')
+    if (plumber.onFloor < 0 || plumber.lives < 1) {
+        gameMenu('over')
     }
 }
 
 function playerWon() {
     if (Number(plumber.onFloor) === FLOORS - 1) {
-        alert('U won')
+        gameMenu('win')
     }
 }
 
