@@ -1,5 +1,4 @@
-import {gameOver, pauseGame} from "./index.mjs";
-import gamePause from "./gamePause.mjs";
+import {pauseGame} from "./index.mjs";
 
 export let plumber = {
     lives: 3,
@@ -10,17 +9,14 @@ export let plumber = {
     down: false,
     jump: false,
     onFloor: 0,
-    collideBump: false
+    collideBump: false,
+    gameOver: false
 }
-
 let mario
 export const animateMario = () => {
-    if (pauseGame.isPaused()) {
-        document.removeEventListener("keydown", moveMario)
-    } else {
-        document.addEventListener("keydown", moveMario)
-        document.addEventListener('keyup', stopMoveMario)
-    }
+
+    document.addEventListener("keydown", moveMario)
+    document.addEventListener('keyup', stopMoveMario)
 
     mario = document.getElementById('mario');
 
@@ -35,10 +31,9 @@ export const animateMario = () => {
         }
     }, 200);
     move()
-    // window.requestAnimationFrame(move);
 }
 
-function moveMario(e) {
+export function moveMario(e) {
     e.preventDefault()
     if (e.code === 'KeyD') {
         plumber.right = true;
@@ -124,11 +119,6 @@ function move() {
     changeFloor()
     isCollide()
     bump();
-
-    if (plumber.lives === 0) {
-        console.log('game over')
-    }
-    // game.animation = window.reqquestAnimationFrame(move);
 }
 
 function jump() {
@@ -157,25 +147,25 @@ function isCollide() {
         }
     }
 
-    // falling down from platform
-    if (!(marioRect.right - 10 >= platform.item(0).getBoundingClientRect().left && (marioRect.left + 10) <= platform.item(platform.length - 1).getBoundingClientRect().right)) {
-        mario.style.top = parseInt(mario.style.top, 10) + 3 + 'px'
-    } else {
-        // // falling down from ladder
-        if (ladder.length > 0) {
-            if (!(ladder.item(0).getBoundingClientRect().left < marioRect.right - 10
-                    && ladder.item(0).getBoundingClientRect().right > marioRect.right - 10)
-                && platform.item(0).getBoundingClientRect().top !== marioRect.bottom) {
+    if (platform.item(0)) {
+        // falling down from platform
+        if (!(marioRect.right - 10 >= platform.item(0).getBoundingClientRect().left && (marioRect.left + 10) <= platform.item(platform.length - 1).getBoundingClientRect().right)) {
+            mario.style.top = parseInt(mario.style.top, 10) + 3 + 'px'
+        } else {
+            // // falling down from ladder
+            if (ladder.length > 0) {
+                if (!(ladder.item(0).getBoundingClientRect().left < marioRect.right - 10
+                        && ladder.item(0).getBoundingClientRect().right > marioRect.right - 10)
+                    && platform.item(0).getBoundingClientRect().top !== marioRect.bottom) {
+                    mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
+                }
+
+                // if there are no any ladder
+            } else if (marioRect.bottom !== platform.item(0).getBoundingClientRect().top) {
                 mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
             }
-
-            // if there are no any ladder
-        } else if (marioRect.bottom !== platform.item(0).getBoundingClientRect().top) {
-            mario.style.top = parseInt(mario.style.top, 10) + 1 + 'px'
         }
     }
-
-
 }
 
 
@@ -219,9 +209,6 @@ function canClimbUp() {
             }
         }
     }
-
-    let ladderBottom
-    let ladderTop
 
     for (const ladderEl of ladder) {
         ladderEl.getBoundingClientRect().bottom
@@ -287,7 +274,25 @@ export function bump() {
 
 function reduceLife() {
     plumber.lives--
+    showLives()
     setTimeout(() => {
         plumber.collideBump = false
     }, 1111)
+}
+
+let gameStat = document.querySelector('.game-status')
+let lives = document.createElement('div')
+lives.style.display = 'flex'
+
+export function showLives() {
+    lives.innerHTML = ''
+    for (let i = 1; i <= plumber.lives; i++) {
+        let live = document.createElement('div')
+        live.style.background = 'url("img/sprite.png") -158px -3px'
+        live.style.width = '16px'
+        live.style.height = '16px'
+        lives.appendChild(live)
+    }
+
+    gameStat.appendChild(lives)
 }
