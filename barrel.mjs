@@ -29,12 +29,6 @@ class Barrel {
             this.barrel.classList.add(this.moves[i % this.moves.length]);
             i++;
 
-            // if (bump()) {
-            //     // this.explode(this.barrel.getBoundingClientRect())
-            //     this.barrel.remove();
-            // }
-
-
             if (this.barrel.offsetLeft < 0 || this.barrel.offsetLeft + 15 > gR.width || this.barrel.offsetTop + 15 > gR.bottom) {
                 clearInterval(iId);
                 this.barrel.remove();

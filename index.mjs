@@ -43,9 +43,11 @@ function startGame() {
                 let div = document.createElement('div')
                 div.classList.add('bg-fon')
                 body.appendChild(div)
+                pauseTimer();
             } else {
                 let div = document.querySelector('.bg-fon')
                 div.remove()
+                resumeTimer();
             }
         }
     })
@@ -121,6 +123,18 @@ function startTimer(minute, second) {
     timeInt = setInterval(() => {
         startTimer(minute, second);
     }, 1000);
+}
+
+let value = '00:00';
+
+function pauseTimer() {
+    value = timer.textContent;
+    clearTimeout(timeInt);
+}
+
+function resumeTimer() {
+    let time = value.split(":");
+    startTimer(parseInt(time[0], 10), parseInt(time[1], 10));
 }
 
 
