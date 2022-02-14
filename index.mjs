@@ -23,6 +23,9 @@ window.addEventListener('keydown', esc)
 function esc(e) {
     if (e.code === 'Escape') {
         gameMenu('pause')
+        if (pauseGame.paused) {
+            pauseTimer();
+        } else resumeTimer();
     }
 }
 
@@ -61,6 +64,7 @@ function gameMenu(gameStatus) {
             plumber.gameOver = true
             menuStatus.textContent = "GAME OVER"
             gameStatus = 'over'
+            pauseTimer();
             break
         case "pause":
             menuStatus.textContent = "PAUSE"
@@ -68,6 +72,7 @@ function gameMenu(gameStatus) {
         case "win":
             menuStatus.textContent = "YOU WIN"
             gameStatus = 'win'
+            pauseTimer();
     }
 
     if (gameStatus !== 'pause') {
