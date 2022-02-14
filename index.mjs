@@ -114,9 +114,6 @@ function playGame(now) {
         }
     }
 
-    animateMario()
-
-
     window.requestAnimationFrame(playGame)
 }
 
