@@ -42,13 +42,10 @@ function startGame() {
     Donkey.create()
     donkey = new Donkey()
     princess = new Princess()
-
     showLives()
 
     window.requestAnimationFrame(playGame)
 }
-
-let lastIntervalTimestamp = 0;
 
 
 function gameMenu(gameStatus) {
@@ -82,6 +79,7 @@ function gameMenu(gameStatus) {
         div.classList.add('bg-fon')
         body.appendChild(div)
     } else if (!pauseGame.isPaused()) {
+        pause.classList.add('hide')
         let div = document.querySelector('.bg-fon')
         div.remove()
     }
@@ -91,10 +89,11 @@ function gameMenu(gameStatus) {
     // })
 }
 
+let lastIntervalTimestamp = 0;
+
 function playGame(now) {
     if (!plumber.gameOver) {
         if (!pauseGame.isPaused()) {
-            pause.classList.add('hide')
             // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
             if (!lastIntervalTimestamp || now - lastIntervalTimestamp >= 5 * 1000) {
                 lastIntervalTimestamp = now;
@@ -112,7 +111,6 @@ function playGame(now) {
 
 
     window.requestAnimationFrame(playGame)
-
 }
 
 export function gameOver() {

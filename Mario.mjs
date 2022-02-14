@@ -1,5 +1,3 @@
-import {pauseGame} from "./index.mjs";
-
 export let plumber = {
     lives: 3,
     right: false,
@@ -14,7 +12,6 @@ export let plumber = {
 }
 let mario
 export const animateMario = () => {
-
     document.addEventListener("keydown", moveMario)
     document.addEventListener('keyup', stopMoveMario)
 
