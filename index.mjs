@@ -53,9 +53,8 @@ function startGame() {
 
 function gameMenu(gameStatus) {
     pause.classList.remove('hide')
-    let restartBtn = document.querySelector('#restart-button')
+    let restartBtn = document.querySelector('#restart-button').addEventListener('click', location.reload);
     let menuStatus = document.querySelector('.manuStatus')
-
     switch (gameStatus) {
         case "over":
             plumber.gameOver = true
@@ -88,10 +87,6 @@ function gameMenu(gameStatus) {
         let div = document.querySelector('.bg-fon')
         div.remove()
     }
-    // restartBtn.addEventListener('click', () => {
-    //     startGame()
-    //
-    // })
 }
 
 let lastIntervalTimestamp = 0;
