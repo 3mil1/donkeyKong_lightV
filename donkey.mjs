@@ -89,7 +89,9 @@ class Donkey {
 
                     this.throwBarrel = true
                     let b = new Barrel()
-                    b.moving();
+
+                        b.moving();
+
                 }
             }, 600);
         }
