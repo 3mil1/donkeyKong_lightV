@@ -28,6 +28,7 @@ function esc(e) {
     }
 }
 
+
 function startGame() {
     startGameBtn.classList.add('hide')
     gameStatus.style.display = "flex";
@@ -50,7 +51,6 @@ function startGame() {
 
 
 function gameMenu(gameStatus) {
-    console.log(gameStatus)
     pause.classList.remove('hide')
     document.querySelector('#restart-button').addEventListener('click', () => {
         location.reload();
