@@ -4,7 +4,6 @@ import {moveMario, plumber, showLives} from "./Mario.mjs";
 import GameBoard from "./GameBoard.mjs";
 import {animateMario} from "./Mario.mjs";
 import Donkey from "./donkey.mjs";
-import Barrel from "./barrel.mjs";
 import Princess from "./princess.mjs";
 import GamePause from "./gamePause.mjs";
 
@@ -29,7 +28,6 @@ function esc(e) {
     }
 }
 
-
 function startGame() {
     startGameBtn.classList.add('hide')
     gameStatus.style.display = "flex";
@@ -52,9 +50,12 @@ function startGame() {
 
 
 function gameMenu(gameStatus) {
+    console.log(gameStatus)
     pause.classList.remove('hide')
-    let restartBtn = document.querySelector('#restart-button').addEventListener('click', location.reload);
-    let menuStatus = document.querySelector('.manuStatus')
+    document.querySelector('#restart-button').addEventListener('click', () => {
+        location.reload();
+    });
+    let menuStatus = document.querySelector('.menuStatus')
     switch (gameStatus) {
         case "over":
             plumber.gameOver = true
@@ -89,9 +90,17 @@ function gameMenu(gameStatus) {
     }
 }
 
+function menu() {
+    let menu = document.querySelector('.menu')
+    menu.classList.remove('hide')
+    menu.innerHTML = '.'
+}
+
 let lastIntervalTimestamp = 0;
 
 function playGame(now) {
+    if (pauseGame.isPaused()) menu()
+
     if (!plumber.gameOver) {
         if (!pauseGame.isPaused()) {
             // не ставить меньше 5 т.к. прошлая анимация у конга не успевает завершиться
