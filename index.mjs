@@ -79,6 +79,7 @@ function gameMenu(gameStatus) {
 
     if (gameStatus !== 'pause') {
         window.removeEventListener('keydown', esc)
+        document.querySelector('#resume-button').classList.add('hide')
     }
 
     pauseGame.pause()
