@@ -1,5 +1,6 @@
 export let plumber = {
     lives: 3,
+    score: 0,
     right: false,
     left: false,
     moving: false,
@@ -233,6 +234,8 @@ function changeFloor() {
         plumber.onFloor = floor1.item(0).classList.item(floor.item(0).classList.length - 1).replace(/[^0-9]/g, "") - 1
     }
 
+
+    showScore()
 }
 
 let brakeMoves = ['one', 'two', 'three', 'four', 'five', 'six'];
@@ -292,4 +295,16 @@ export function showLives() {
     }
 
     gameStat.appendChild(lives)
+}
+
+let xp = document.createElement('div')
+
+export function showScore() {
+    xp.innerText = ''
+    if (plumber.score < plumber.onFloor) {
+        plumber.score = plumber.onFloor
+    }
+    xp.innerText = `${plumber.score}XP`
+
+    gameStat.appendChild(xp)
 }

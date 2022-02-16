@@ -1,5 +1,5 @@
 import {FLOORS, LEVEL, OBJECT_TYPE} from "./setup.mjs";
-import {moveMario, plumber, showLives} from "./Mario.mjs";
+import {moveMario, plumber, showLives, showScore} from "./Mario.mjs";
 // Classes
 import GameBoard from "./GameBoard.mjs";
 import {animateMario} from "./Mario.mjs";
@@ -45,7 +45,6 @@ function startGame() {
     donkey = new Donkey()
     princess = new Princess()
     showLives()
-
     window.requestAnimationFrame(playGame)
 }
 
@@ -54,6 +53,12 @@ function gameMenu(gameStatus) {
     pause.classList.remove('hide')
     document.querySelector('#restart-button').addEventListener('click', () => {
         location.reload();
+    });
+    document.querySelector('#resume-button').addEventListener('click', () => {
+        gameMenu('pause')
+        if (pauseGame.paused) {
+            pauseTimer();
+        } else resumeTimer();
     });
     let menuStatus = document.querySelector('.menuStatus')
     switch (gameStatus) {
