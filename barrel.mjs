@@ -17,9 +17,9 @@ class Barrel {
 
     moving() {
         let i = 0;
-        let x = Math.floor(Math.random() * 225 + 15) / 20;
-        x = x * (Math.round(Math.random()) * 2 - 1);
         let gR = this.game.getBoundingClientRect();
+        let x = Math.floor(Math.random() * gR.width + 15) / 20;
+        x = x * (Math.round(Math.random()) * 2 - 1);
         let iId = setInterval(() => {
             let wCurrent = this.barrel.offsetLeft;
             let hCurrent = this.barrel.offsetTop;
